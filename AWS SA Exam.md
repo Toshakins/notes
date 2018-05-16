@@ -51,12 +51,22 @@ Consists of:
 #### Definition
 Security in the cloud consists of four areas:
 * __Data protection__. Classify data availability(public or partially restricted). Implement least privilege access to system. Encrypt evetything where possible(i.e. at rest and in transit). 
+  * How do you protecting your data at rest?
+  * How do you protecting your data in transit?
 * __Privilege management__. Ensures that only authorized and authenticated users are able to access your resources. It can include:
   * ACL
   * Role-based Access Controls
   * Password Management
+  
+  Questions:
+  * How do you protect access to and use of AWS root account credentials?
+  * How are defining roles and responsibilites of system users to control human access to AWS Management Console and APIs?
+  * How are you limiting automated access(i.e. access from applications)?
 * __Infrastructure protection__. Outside of the cloud includes things like CCTV, perimeter guards, locks. Inside cloud protection exists on a VPC level.
-* __Detective controls__
+  * How are you enforing network and host-boundary protection?
+  * How are you enforcing AWS service level protection?
+  * How are protecting the integrity of operation systems?
+* __Detective controls__. How are you analyzing logs?
   * CloudTrail
   * CloudWatch
   * AWS Config
