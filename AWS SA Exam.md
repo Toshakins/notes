@@ -35,3 +35,27 @@ Consists of:
 * Kinesis Streams. Consists of the shards which deliver messages to consumers(EC2). Retention: 24h - 7d.
 * Kinesis Firehose. Allows optional processing with Lambda. If not present, stores data in S3.
 * Kinesis Analytics
+
+
+## Pillars
+
+### Security
+* Apply on all levels
+* Enable traceability
+* Automate response to security events
+* Focus on your securing your system
+* Automate security best practices(like validated AMIs)
+
+#### Definition
+Security in the cloud consists of four areas:
+* __Data protection__. Classify data availability(public or partially restricted). Implement least privilege access to system. Encrypt evetything where possible(i.e. at rest and in transit). 
+* __Privilege management__. Ensures that only authorized and authenticated users are able to access your resources. It can include:
+  * ACL
+  * Role-based Access Controls
+  * Password Management
+* __Infrastructure protection__. Outside of the cloud includes things like CCTV, perimeter guards, locks. Inside cloud protection exists on a VPC level.
+* __Detective controls__
+  * CloudTrail
+  * CloudWatch
+  * AWS Config
+  * S3, Glacier
