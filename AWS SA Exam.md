@@ -40,6 +40,8 @@ Consists of:
 ## Pillars
 
 ### Security
+
+#### Design principles
 * Apply on all levels
 * Enable traceability
 * Automate response to security events
@@ -59,3 +61,26 @@ Security in the cloud consists of four areas:
   * CloudWatch
   * AWS Config
   * S3, Glacier
+
+### Reliability
+Covers the ability of your system to recover from service or infrastructure outages as well as ability to dynamically acquire computing resources to meet demand.
+
+#### Design principles
+* Test recovery procedures(chaos monkey)
+* Automatically recover from failures
+* Scale horizontally
+* Stop guessing capacity
+
+#### Definition
+* __Foundation__. AWS almost limitless in terms of providing infrastructure. However, it sets service limits to preserve from overbooking the capabilities. Key services: IAM, VPC.
+  * How are you managing service limits?
+  * How are you planning your network topology on AWS?
+  * Do you have an escalation path to deal with technical issues?
+* __Change management__. Monitor any change to the system to be able to react in time. Key services: CloudTrail.
+  * How does your system adapt to changes in demand?
+  * How are you monitoring the AWS resources?
+  * How are you excuting change management?
+* __Failure management__. Plan failure, plan reaction to them. Ensure you are aware of the failure. Key services: CloudFormation.
+  * How are you backing up your data?
+  * How does your system withstand component failures?
+  * How are you planning for recovery?
