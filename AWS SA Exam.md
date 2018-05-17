@@ -1,5 +1,17 @@
 ## Application Services
 
+### S3
+Access control levels:
+* IAM
+* Bucket policy
+* ACL(restrict access to the group of AWS users)
+* Query String Auth(via HTTP paremeters).
+
+Encryption options:
+* __SSE-S3__. Amazon handles key management and key protection.
+* __SSE-C__. AWS user controls keys used to encrypt objects.
+* __SSE-KMS__. Encryption keys managed with AWS KMS. KMS provides a trail to monitor who used a key, when and for what.
+
 ### SQS
 Worth reading an FAQ. Message queue, works with in a "poll" model. Messages 256 KB size and can be queued from 1 min to 14 days.
 
