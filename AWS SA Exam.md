@@ -1,21 +1,21 @@
 ## Application Services
 
 ### S3
-__Access control levels__:
+Access control levels:
 * IAM
 * Bucket policy
 * ACL(restrict access to the group of AWS users)
 * Query String Auth(via HTTP paremeters).
 
-__Encryption options__:
+Encryption options:
 * __SSE-S3__. Amazon handles key management and key protection.
 * __SSE-C__. AWS user controls keys used to encrypt objects.
 * __SSE-KMS__. Encryption keys managed with AWS KMS. KMS provides a trail to monitor who used a key, when and for what.
 
-__Storage options__
+Storage options
 * Standard
-* IA
-* IA one zone
+* IA(infrequent access)
+* IA one-zone
 * Reduced Redundancy
 * Glacier
 
