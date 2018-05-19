@@ -16,7 +16,7 @@ Storage options
 * Standard
 * IA(infrequent access)
 * IA one-zone
-* Reduced Redundancy
+* Reduced Redundancy. AWS does not recommend to use it as Standard is more cost-effective.
 * Glacier
 
 ### SQS
