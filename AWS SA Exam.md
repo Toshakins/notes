@@ -19,6 +19,12 @@ Storage options
 * Reduced Redundancy. AWS does not recommend to use it as Standard is more cost-effective.
 * Glacier
 
+S3 Select is a new functionality that allows "querying in place", i.e. getting parts of the stored objects.
+
+S3 Inventory provides audit and reports on objects state. Contrary to the LIST request Inventory is a scheduled job and can be applied to a subset of a bucket's objects(and return more data). Reports stored in CSV or ORC at specific destination.
+
+Lifycycle management. It helps to build you an flow for objects between different storage options, e.g. transit Standard -> IA -> Glacier. Lifecycle gotcha: you can expire and delete unfinished multipart uploads.
+
 ### SQS
 Worth reading an FAQ. Message queue, works with in a "poll" model. Messages 256 KB size and can be queued from 1 min to 14 days.
 
@@ -113,3 +119,30 @@ Covers the ability of your system to recover from service or infrastructure outa
   * How are you backing up your data?
   * How does your system withstand component failures?
   * How are you planning for recovery?
+
+### Cost Optimization
+
+#### Design Principles
+
+* Transparently attribute expenditure(tag AWS resources per unit, department etc.)
+* Use managed service to reduce ownership
+* Trade capital expense for operating expense(utilise resources when needed, not constantly)
+* Benefit from economies of scale
+* Stop spending money on data center operations
+
+#### Definition
+* Matched supply and demand. Do not over(or under) provision, be agile.
+  * How do you make sure that you capacity matches but does not substantially exceed what you need?
+  * How are you optimizing your usage of AWS services
+* Cost-effective resources. e.g. pick right instance to do the job.
+  * Have you selected the appropriate resource type?
+  * Have you selected the appropriate pricing model?
+  * Are there managed services that can improve your ROI?
+* Expenditure awareness. Be aware who runs what resources. Use cost allocation tags, billing alerts and consolidated billing.
+  * What means do you have to control AWS costs?
+  * How are you monitoring usage and spending?
+  * How do you decomission resources that no longer need?
+  * How do you consider data-transfer charges when designing your architecture?
+* Optimizing over time. AWS moves rapidly. Go together with Amazon and use the best newest services. Subscribe to the blog! Use Trusted Advisor!
+  * How do you manage and consider adoption of new services?
+
