@@ -23,7 +23,7 @@ S3 Select is a new functionality that allows "querying in place", i.e. getting p
 
 S3 Inventory provides audit and reports on objects state. Contrary to the LIST request Inventory is a scheduled job and can be applied to a subset of a bucket's objects(and return more data). Reports stored in CSV or ORC at specific destination.
 
-Lifycycle management. It helps to build you an flow for objects between different storage options, e.g. transit Standard -> IA -> Glacier. Lifecycle gotcha: you can expire and delete unfinished multipart uploads.
+Lifecycle management. It helps to build you an flow for objects between different storage options, e.g. transit Standard -> IA -> Glacier. Lifecycle gotcha: you can expire and delete unfinished multipart uploads.
 
 ### SQS
 Worth reading an FAQ. Message queue, works with in a "poll" model. Messages 256 KB size and can be queued from 1 min to 14 days.
@@ -146,3 +146,61 @@ Covers the ability of your system to recover from service or infrastructure outa
 * Optimizing over time. AWS moves rapidly. Go together with Amazon and use the best newest services. Subscribe to the blog! Use Trusted Advisor!
   * How do you manage and consider adoption of new services?
 
+### Performance Efficiency
+
+#### Design Priciples
+
+* Democratize advanced technologies(easier adoption of techonologies like SageMaker, DynamoDB).
+* Go global in minutes
+* Use server-less architectures
+* Experiment more often
+
+#### Definition
+
+* Compute
+  * How do you select the appropriate instance type for your system?
+  * How do you ensure that you have most appropriate features and instance type when new features are introduced?
+  * How do you monitor instances post-launch to ensure they behave as expected?
+  * How do you ensure that quantity of your instances matches the demand?
+* Storage
+  * How do you select the appropriate storage solution for your system?
+  * How do you ensure that you have the most appropriate storage solution when new features are launched?
+  * How do you monitor your storage to ensure that it behaves as expected?
+  * How do you ensure that capacity and throughput of your storage solution matches the demand?
+* Database
+  * How do you select the appropriate database solution?
+  * How do you ensure that database behaves correctly?
+  * How do you monitor databases to ensure that it behaves correctly?
+  * How do you assure you have right capacity and throughput?
+* Space-time tradeoff. Services: Elasticase, CloudFron, DirectConnect.
+  * How do you select the appropriate proximity and caching solutions for your system?
+  * How do you ensure those solutions are updated as new feature are coming in?
+  * The same.
+  * The same.
+
+### Operational Excelence
+
+Includes operational practices and procedures used to manage production workloads. This includes how planned changes are executed, as well as response to unexpected operational events. Change execution and responses should be automated. All procedures and processes of operational excellence should be documented, tested and regularly reviewed.
+
+#### Design Principles
+* Perform operations with code
+* Align operations processes to business objectives
+* Make regular, small, incremental changes
+* Test for responses to unexpected events
+* Learn from operational events and failures
+* Keep operations procedures current(up-to-date)
+
+#### Definition
+* Preparation. Operation checklists will ensure that workload is ready for production, and prevent unintentional production promotion without effective preparation. Workloads should have;
+  * Runbooks - operations guidance that operations teams can refer to so they can perform normal daily tasks.
+  * Playbooks - guidance for responding to unexpected operational events. Should include response plans, as well as escalation paths and stakeholder notifications.
+  Services: CloudFormation, AutoScaling, AWS Config, tagging.
+  Questions:
+  * What best practices for cloud operation are you using?
+  * How are you doing configuration management for your workload?
+* Operations. Should be focused on automation, small frequent changes, reqular QA testing, and defined mechanism to track, audit, roll back, and review changes. Changes should not require scheduled downtime and they should not require manual execution. A wide range of logs and metrics that based on key operational indicators for a workload should be collected and reviewed to ensure continuous operations. Services: PipeLine, CodeCommit, CodeDeploy, CloudTrail.
+  * How you are evelving your workload while minimizing the impact of change?
+  * How do you monitor your workload to ensure it is operating as expected?
+* Responses. Should cover alerts, mitigation, remediation, rollback and recovery. Alerts should be timely and escalate when no adequate mitigation happened. QA mechanisms should be set in place to roll back failed deployments. Responses should follow a pre-defined playbook that includes the stakeolders, the escalation process and procedures. Escalation path should be defined and include both functional and hierarchical escalation capabilities. Hierarchical escalation should be automated, and escalated priority should result in a stakeholder notification. __Services__: SNS, CloudWatch..
+  * How do you respond to unplanned operational events?
+  * How is escalation managed when responding to unplannedoperational events?
