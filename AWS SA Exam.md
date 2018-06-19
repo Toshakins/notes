@@ -204,3 +204,33 @@ Includes operational practices and procedures used to manage production workload
 * Responses. Should cover alerts, mitigation, remediation, rollback and recovery. Alerts should be timely and escalate when no adequate mitigation happened. QA mechanisms should be set in place to roll back failed deployments. Responses should follow a pre-defined playbook that includes the stakeolders, the escalation process and procedures. Escalation path should be defined and include both functional and hierarchical escalation capabilities. Hierarchical escalation should be automated, and escalated priority should result in a stakeholder notification. __Services__: SNS, CloudWatch..
   * How do you respond to unplanned operational events?
   * How is escalation managed when responding to unplannedoperational events?
+
+## VPC Peering
+
+It is simply a connection between two VPCs that enable you to route traffic using private IP addresses. Additionally, it is possible to create VPC endpoints for services such as S3(so access won't be publicly visible).
+
+## Direct Connect
+
+AWS DC makes it easy to establish a dedicated network connection from your premises to AWS. In many cases it can reduce network costs, increase bandwidth and provide more consistent network experience than Internet-based connections.
+
+Premises connect to a DC facility which has a high-speed connection to AWS datacenters.
+
+## Security Token Service
+
+Grants users limited and temporary access to AWS resources. Users can come from three sources:
+
+* Federation(e.g. Active Directory).
+  * Uses SAML
+  * Grants temporary access based on credentials
+  * Does need to be a user in IAM
+  * SSO allows users to log in without assigning AWS credentials
+* Federation with mobile apps
+  * Uses FB/Amzn/Google/OpenID providers to log in
+* Cross Account Access
+  * Let's users from one AWS account to another
+
+### Understanding Key Terms
+
+* __Federation__: combining or joining a list of users in one domain(such as IAM) with a list of users in another domain(such as AD, FB and etc.)
+* __Identity Broker__: a service that allows you to take an identity from point A and join it(federate it) to point B.
+ 
