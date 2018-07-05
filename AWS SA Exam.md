@@ -1,5 +1,7 @@
 - [Application Services](#application-services)
   * [S3](#s3)
+  * [EC2](#ec2)
+    + [Storages](#storages)
   * [SQS](#sqs)
   * [SWF(Simple WorkFlow)](#swf-simple-workflow-)
   * [SNS](#sns)
@@ -52,6 +54,33 @@ S3 Select is a new functionality that allows "querying in place", i.e. getting p
 S3 Inventory provides audit and reports on objects state. Contrary to the LIST request Inventory is a scheduled job and can be applied to a subset of a bucket's objects(and return more data). Reports stored in CSV or ORC at specific destination.
 
 Lifecycle management. It helps to build you an flow for objects between different storage options, e.g. transit Standard -> IA -> Glacier. Lifecycle gotcha: you can expire and delete unfinished multipart uploads.
+
+### EC2
+Pricing models:
+* On demand
+* Reserved capacity
+* Spot
+* Dedicated hosts
+
+Instance types:
+**FIGHT DR MC PIX**
+
+SSD:
+* General Purpose SSD
+* Provisioned IOPS
+
+Magnetic:
+* Throughput Optimized
+* Cold HDD
+* Magnetic(previous generation)
+
+Security Groups are **STATEFUL**(allowed traffic allows in and out). You can specify only ALLOW rules.
+
+Snapshots of encrypted volumes are encrypted automatically. You can share only unencrypted snapshots.
+
+#### Storages
+* EBS Volumes
+* Instance store - ephemeral
 
 ### SQS
 Worth reading an FAQ. Message queue, works with in a "poll" model. Messages 256 KB size and can be queued from 1 min to 14 days.
