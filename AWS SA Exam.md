@@ -162,21 +162,34 @@ Covers the ability of your system to recover from service or infrastructure outa
 * Automatically recover from failures
 * Scale horizontally
 * Stop guessing capacity
+* Manage change in automation
 
 #### Definition
-* __Foundation__. AWS almost limitless in terms of providing infrastructure. However, it sets service limits to preserve from overbooking the capabilities. Key services: IAM, VPC.
-  * How are you managing service limits?
-  * How are you planning your network topology on AWS?
-  * Do you have an escalation path to deal with technical issues?
-* __Change management__. Monitor any change to the system to be able to react in time. Key services: CloudTrail.
-  * How does your system adapt to changes in demand?
-  * How are you monitoring the AWS resources?
-  * How are you excuting change management?
-* __Failure management__. Plan failure, plan reaction to them. Ensure you are aware of the failure. Key services: CloudFormation.
-  * How are you backing up your data?
-  * How does your system withstand component failures?
-  * How are you planning for recovery?
+##### __Foundation__. 
+* Limit Management. Ensure you track your AWS limits for services. Those are enforced by region and account.
+* Networking. Ensure you specify IP addresses that will last across several availability zones. Have duplicated means communicating with and withing your cloud. Leave unused CIDR space within VPC. Protect yourself against DoS attacks on the network level(AWS Shield + WAF).
 
+##### __Application Design for High Availability__
+* Understand availability needs. Not every system needs five nines of resilience.
+* Design itself
+  * Fault Isolation Zones. Extra note: __shuffle sharding__.
+  * Redundant Components
+  * Micro-service architecture. Drawbacks: Distribution, eventual consistency, operational complexity. Positives: strong module boundaries, independent deployment, technology diversity. 
+  * Recovery-oriented computing. Many different types of failure can be recovered with one path. Develop for recovery and test for recovery.
+  * Distributed systems best practices
+    * Throttling
+    * Exponential back-off
+    * Fail fast. Do not queue errors. Release resources ASAP.
+    * Use of idempotency tokens
+    * Constant work. If you know your exact capacity of slots for workload, make sure you always put something into those slots to avoid performance spikes. Possible to put a "filler" work([idk AWS talking about](https://aws.amazon.com/blogs/architecture/doing-constant-work-to-avoid-failures/)).
+    * Circuit breaker
+    * Bi-modal behavior and static stability. Avoid negative feedback loops in system design. Failure in one component should not affect responsiveness in another one.
+* Operational Considerations
+  * Automate deployments to eliminate impact(canary, blue-green, feature toggles).
+  * Testing
+  * Monitoring and Alarming(percentile monitoring based on max characteristics. Do not use averages).
+  * Operational Readiness Review. Could be performed twice a year.
+  * Auditing
 ### Cost Optimization
 
 #### Design Principles
@@ -205,7 +218,7 @@ Covers the ability of your system to recover from service or infrastructure outa
 
 ### Performance Efficiency
 
-#### Design Priciples
+#### Design Principles
 
 * Democratize advanced technologies(easier adoption of techonologies like SageMaker, DynamoDB).
 * Go global in minutes
