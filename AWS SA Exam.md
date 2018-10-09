@@ -64,6 +64,25 @@ Pricing models:
 
 Instance types:
 **FIGHT DR MC PIX**
+* General Purpose
+  * T. Burstable.
+  * M. Fixed performance without burst.
+* Compute Optimized
+  * C
+* Memory Optimized
+  * R
+  * X1(e). SAP-certified instance type for huge databases.
+  * U. High-memory instances(several TiB).
+  * Z1d. Recommended for electronic design automation and certain relational database workloads with high per-core licensing costs.
+* Storage Optimized
+  * H. HDD storage with high-speed networking. MapReduce, NFS, log processing.
+  * I. NVMe-backed instances for hight random IO and hight sequential read. Bare metal instances included.
+  * D. Massive-size HDD storage. Even bigger MapReduce, warehouses.
+  
+* Accelerated Computing
+  * P. General purpose GPU instances.
+  * G. Graphics-intensive applications.
+  * F. FPGA hardware acceleration.
 
 SSD:
 * General Purpose SSD
