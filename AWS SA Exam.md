@@ -6,6 +6,7 @@
   * [SWF(Simple WorkFlow)](#swf-simple-workflow-)
   * [SNS](#sns)
   * [Kinesis](#kinesis)
+  * [VPC](#vpc)
 - [Pillars](#pillars)
   * [Security](#security)
     + [Design principles](#design-principles)
@@ -136,6 +137,10 @@ Consists of:
 * Kinesis Streams. Consists of the shards which deliver messages to consumers(EC2). Retention: 24h - 7d.
 * Kinesis Firehose. Allows optional processing with Lambda. If not present, stores data in S3.
 * Kinesis Analytics
+
+### VPC
+
+* [VPC with private and public subnet](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Scenario2.html)
 
 
 ## Pillars
