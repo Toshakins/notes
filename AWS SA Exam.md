@@ -102,6 +102,9 @@ Snapshots of encrypted volumes are encrypted automatically. You can share only u
 * EBS Volumes
 * Instance store - ephemeral
 
+#### EC2 Fleet
+EC2 fleet is a feature to start a fleet of instances with a one API call.
+
 ### SQS
 Worth reading an FAQ. Message queue, works with in a "poll" model. Messages 256 KB size and can be queued from 1 min to 14 days.
 
