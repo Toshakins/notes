@@ -152,6 +152,13 @@ VPC Endpoints
 * Gateway type. Only for AWS services, add entry to the route table to route traffic through the Amazon's private network(S3 and DynamoDB).
 * Interface type. Provide private connectivity to services powered by PowerLink.
 
+#### ACL VS SECURITY GROUPS
+Network ACLs perform stateless filtering while security groups perform stateful filtering.
+
+Stateful filtering tracks the origin of a request and can automatically allow the reply to the request to be returned to the originating computer. For example, a stateful filter that allows inbound traffic to TCP port 80 on a webserver will allow the return traffic, usually on a high numbered port (e.g., destination TCP port 63, 912) to pass through the stateful filter between the client and the webserver. The filtering device maintains a state table that tracks the origin and destination port numbers and IP addresses. Only one rule is required on the filtering device: Allow traffic inbound to the web server on TCP port 80.
+
+Stateless filtering, on the other hand, only examines the source or destination IP address and the destination port, ignoring whether the traffic is a new request or a reply to a request. In the above example, two rules would need to be implemented on the filtering device: one rule to allow traffic inbound to the web server on TCP port 80, and another rule to allow outbound traffic from the webserver (TCP port range 49, 152 through 65, 535).
+
 
 ## Pillars
 
