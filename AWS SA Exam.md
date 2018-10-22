@@ -98,6 +98,9 @@ Security Groups are **STATEFUL**(allowed traffic allows in and out). You can spe
 
 Snapshots of encrypted volumes are encrypted automatically. You can share only unencrypted snapshots.
 
+#### Optimize CPU
+You can [disable Hyper-Threading](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html) for intensive workloads.
+
 #### Storages
 * EBS Volumes
 * Instance store - ephemeral
