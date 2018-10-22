@@ -148,6 +148,10 @@ Consists of:
 
 * [VPC with private and public subnet](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Scenario2.html)
 
+VPC Endpoints
+* Gateway type. Only for AWS services, add entry to the route table to route traffic through the Amazon's private network(S3 and DynamoDB).
+* Interface type. Provide private connectivity to services powered by PowerLink.
+
 
 ## Pillars
 
