@@ -7,7 +7,7 @@
   * [SNS](#sns)
   * [Kinesis](#kinesis)
   * [VPC](#vpc)
-  * [Route 53)(#route53)
+  * [Route 53](#route53)
 - [Pillars](#pillars)
   * [Security](#security)
     + [Design principles](#design-principles)
