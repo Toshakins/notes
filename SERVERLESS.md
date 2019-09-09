@@ -14,3 +14,10 @@
 * Limited customization(memory, CPU. Cannot preinstall some stuff).
 * Vendor lock-in(to AWS, Azure).
 * Decentralized challenges(hard to log analyze data from lots of functions -> inscreased complexity of the system).
+
+## Serverless Principles
+1. Use a compute service to execute code on demand
+1. Write single-purpose stateless functions
+1. Design push-based, event-driven pipelines
+1. Create thicker, more powerful front ends
+1. Embrace third party services
