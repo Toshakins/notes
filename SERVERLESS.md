@@ -41,3 +41,12 @@ There are also BaaS - backend-as-a-service(think of Firebase) which kind of spec
 1. Design push-based, event-driven pipelines
 1. Create thicker, more powerful front ends
 1. Embrace third party services
+
+## Function Operation
+**Cold call** is a call of FaaS function which creates the first running instance of that function. Can take up to several seconds due to the need of getting container and starting it.
+**Warm call** is a call of an already existing function instance. Therefore no overhead happens for retrieveng and starting the environment.
+It is important to operate in stateless style, otherwise state will be persistent between warm calls.
+**Concurrent calls** happen when there is a need to start several instances of a particular function.
+**No calls** happen when you have too many function instances and not enough requets.
+Functions can be called synchronously of asynchronously.
+
