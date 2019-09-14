@@ -1,6 +1,6 @@
 ## What is Serverless?
 
-### How we get there?
+### How we got there?
 On premise(self-hosted) systems -> IaaS -> PaaS -> CaaS(containers) -> FaaS.
 
 There are also BaaS - backend-as-a-service(think of Firebase) which kind of specific SaaSes.
