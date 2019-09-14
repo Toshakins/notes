@@ -1,3 +1,23 @@
+## What is Serverless?
+
+### How we get there?
+On premise(self-hosted) systems -> IaaS -> PaaS -> CaaS(containers) -> FaaS.
+
+There are also BaaS - backend-as-a-service(think of Firebase) which kind of specific SaaSes.
+
+**Serverless** = FaaS + BaaS(or SaaS).
+* It is a paradigm of building applications.
+* Servers could be still involved.
+* You don't manage the underlying layers(below you code).
+* Pricing is based on what you consume(time, memory).
+* Scaling is flexible.
+
+### Rules of Serverless
+* Functions are stateless and run on ephemeral compute services.
+* Frontends can be thicker.
+* Functions adhere Single Responsibility Principle and written in an event-driven style.
+* Utilise third-party vendors to complete functional parts of your application.
+
 ## Serverless pros and cons
 
 ### Pros
