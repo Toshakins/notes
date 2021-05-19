@@ -1,0 +1,7 @@
+- **DFIR** - Digital Forensic and Incident Response
+- **IDOR** - Insecure direct object references
+- **IDS** – Intrusion Detection System
+- **IOC** - Indicator Of Compromise
+- **RFI** - Remote File Inclusion
+- **SSRF**
+- **LFI**(attack)
