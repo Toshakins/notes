@@ -352,14 +352,19 @@ Methods:
 
 ### Attack Privilege Requirements
 
-- Kerbrute Enumeration - No domain access required 
-- Pass the Ticket - Access as a user to the domain required
-- Kerberoasting - Access as any user required
-- AS-REP Roasting - Access as any user required
-- Golden Ticket - Full domain compromise (domain admin) required 
+- Kerbrute Enumeration - No domain access required. Possible to identify which users do exist on the domain(machine?).
+- Ticket harvesting - access as a user required. Possible to harvest a TGT. Can be done with rubeus or impacket. 
+- Password spraying - access as a user to the domain required. Possible to identify user who uses a certain password. Brute-forcing is possible too.
+- Pass the Ticket - Access as a user to the domain required(evil-winrm or mimikatz)
+- Kerberoasting - Access as any user required. Allows a user to get a service ticket for any service with a registered SPN. That ticket allows to crack the service password. Example command: `impacket-GetUserSPNs CONTROLLER.local/Machine1:Password1 -dc-ip 10.10.235.186 -request `
+- AS-REP Roasting - Access as any user required. Rubeus can do that, or use impacket-GetNPUsers, example: `impacket-GetNPUsers spookysec.local/svc-admin -request -no-pass   -dc-ip 10.10.54.141`
+- Golden Ticket - Full domain compromise (domain admin) required. Example: `impacket-secretsdump account:password@10.10.16.51`
 - Silver Ticket - Service hash required 
 - Skeleton Key - Full domain compromise (domain admin) required
 
 ### Tools
 - impacket
 - kerbrute
+
+### Wisdom
+Readable IPC$ means that you can enumerate users via `impacket-lookupsid`.
