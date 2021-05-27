@@ -350,21 +350,51 @@ Methods:
 
 ![kerberos authentication scheme](./img/kerberos.png)
 
-### Attack Privilege Requirements
+### Attack Vectors
+https://www.tarlogic.com/en/blog/how-to-attack-kerberos/
+https://www.tarlogic.com/en/blog/how-kerberos-works/
 
+- Kerberos Bruteforce	
+    - No domain account is needed to conduct the attack, just connectivity to the KDC.
+    - Kerberos pre-authentication errors are not logged in Active Directory with a normal Logon failure event (4625), but rather with specific logs to Kerberos pre-authentication failure (4771).
+    - Kerberos indicates, even if the password is wrong, whether the username is correct or not. This is a huge advantage in case of performing this sort of technique without knowing any username.
+    - In Kerberos brute-forcing it is also possible to discover user accounts without pre-authentication required, which can be useful to perform an ASREPRoast attack.
+    - Commands: `kerbrute.py -domain <domain_name> -users <users_file> -passwords <passwords_file> -outputfile <output_file>`(Linux), `Rubeus.exe brute /users:<users_file> /passwords:<passwords_file> /domain:<domain_name> /outfile:<output_file>`(Windows)
 - Kerbrute Enumeration - No domain access required. Possible to identify which users do exist on the domain(machine?).
 - Ticket harvesting - access as a user required. Possible to harvest a TGT. Can be done with rubeus or impacket. 
 - Password spraying - access as a user to the domain required. Possible to identify user who uses a certain password. Brute-forcing is possible too.
-- Pass the Ticket - Access as a user to the domain required(evil-winrm or mimikatz)
-- Kerberoasting - Access as any user required. Allows a user to get a service ticket for any service with a registered SPN. That ticket allows to crack the service password. Example command: `impacket-GetUserSPNs CONTROLLER.local/Machine1:Password1 -dc-ip 10.10.235.186 -request `
-- AS-REP Roasting - Access as any user required. Rubeus can do that, or use impacket-GetNPUsers, example: `impacket-GetNPUsers spookysec.local/svc-admin -request -no-pass   -dc-ip 10.10.54.141`
+- OverPass the Has/Pass the Key
+	- This attack aims to use user NTLM hash to request Kerberos tickets, as an alternative to the common Pass The Hash over NTLM protocol. Therefore, this could be especially useful in networks where NTLM protocol is disabled and only Kerberos is allowed as authentication protocol.
+	- In order to perform this attack, the NTLM hash (or password) of the target user account is needed. Thus, once a user hash is obtained, a TGT can be requested for that account. Finally, it is possible to access any service or machine where the user account has permissions.
+	- Linux flow:
+		- Use hash to get TGT `python getTGT.py jurassic.park/velociraptor -hashes :2a3de7fe356ee524cc9f3d579f2e0aa7`
+		- `export KRB5CCNAME=/root/impacket-examples/velociraptor.ccache`
+		- `python psexec.py jurassic.park/velociraptor@labwws02.jurassic.park -k -no-pass`, or `evil-winrm -H ...`
+	- Windows flow:
+		- `.\Rubeus.exe asktgt /domain:jurassic.park /user:velociraptor /rc4:2a3de7fe356ee524cc9f3d579f2e0aa7 /ptt`
+		- `.\PsExec.exe -accepteula \\labwws02.jurassic.park cmd`
+- Pass the ticket
+	- This kind of attack is similar to Pass the Key, but instead of using hashes to request for a ticket, the ticket itself is stolen and used to authenticate as its owner. The way of recolecting these tickets changes from Linux to Windows machines, therefore each process will be introduced in its own section.
+	- Use mimikatz or Rubeus to dump the ticket, then psexec to pass it to the target. 
+- Kerberoasting - Access as any user required. Allows a user to get a service ticket for any service with a registered SPN. That ticket allows to crack the service password. Example command: `impacket-GetUserSPNs CONTROLLER.local/Machine1:Password1 -dc-ip 10.10.235.186 -request `. Rubeus: `Rubeus.exe kerberoast /outfile:hashes.kerberoast`.
+	- The goal of Kerberoasting is to harvest TGS tickets for services that run on behalf of user accounts in the AD, not computer accounts. Thus, part of these TGS tickets is encrypted with keys derived from user passwords. As a consequence, their credentials could be cracked offline.
+	- Therefore, to perform Kerberoasting, only a domain account that can request for TGSs is necessary, which is anyone since no special privileges are required.
+- AS-REP Roasting - Access as any user required. Rubeus can do that `Rubeus.exe asreproast /format:hashcat /outfile:hashes.asreproast`, or use impacket-GetNPUsers, example: `impacket-GetNPUsers spookysec.local/svc-admin -request -no-pass   -dc-ip 10.10.54.141`
+	- The ASREPRoast attack looks for users without Kerberos pre-authentication required. That means that anyone can send an AS_REQ request to the KDC on behalf of any of those users, and receive an AS_REP message. This last kind of message contains a chunk of data encrypted with the original user key, derived from its password. Then, by using this message, the user password could be cracked offline.
+	- No domain account is needed to perform this attack, only connection to the KDC. However, with a domain account, an LDAP query can be used to retrieve users without Kerberos pre-authentication in the domain. Otherwise usernames have to be guessed.
 - Golden Ticket - Full domain compromise (domain admin) required. Example: `impacket-secretsdump account:password@10.10.16.51`
-- Silver Ticket - Service hash required 
+- Silver Ticket - Service hash required.
+	- Impacket: `impacket-ticketer`.
+	- Mimikatz
 - Skeleton Key - Full domain compromise (domain admin) required
 
-### Tools
-- impacket
-- kerbrute
+### Mitigation
 
+- Enable an strong password policy
+- Avoid accounts without pre-authentication
+- Avoid executing services in behalf of account accounts.  Avoid services that run in domain user account context. In case of using an special user account for launch domain services, generate an strong pseudo-random password for that account.
+- Verify PAC(Privileged Attribute Certificate): Enable PAC verification in order to avoid attacks such as Silver Ticket.
+- Change passwords periodically. `krbtgt` password must be modified twice to invalidate current domain tickets, for cache reasons.
+- Disable Kerberos weak encryption types.
 ### Wisdom
 Readable IPC$ means that you can enumerate users via `impacket-lookupsid`.
